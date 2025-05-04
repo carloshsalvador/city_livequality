@@ -14,7 +14,7 @@ requirements.txt for Python´s dependency.
 ## local tests
 
 ```bash
-python http.server
+python -m http.server
 http://localhost:8000/cities/berlin/map.html
 ```
 
