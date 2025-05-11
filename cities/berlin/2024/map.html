@@ -13,19 +13,29 @@
 <body>
 
 <div class="slider-container">
-  <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valGreen">0.25</span><br/>
-  <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valSummer">0.25</span><br/>
-  <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valHot">0.25</span><br/>
-  <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valTrop">0.25</span>
+  <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valGreen">1.0</span><br/>
+  <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valSummer">1.0</span><br/>
+  <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valHot">1.0</span><br/>
+  <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valTrop">1.0</span>
 </div>
 
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Atualiza os valores dos sliders na tela ao carregar a página
+    ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
+      const el = document.getElementById(id);
+      const valEl = document.getElementById("val" + id.slice(1));
+      valEl.innerText = el.value;
+    });
+  });
+</script>
 <script src="../../static/script.js"></script>
 </body>
 </html>
