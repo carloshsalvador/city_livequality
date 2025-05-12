@@ -1,0 +1,22 @@
+#legend-container {
+    position: absolute;
+    left: 10px;
+    top: 100px;
+    z-index: 1000;
+    background: white;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  #legend-container img {
+    height: 200px;
+  }
+  #compass {
+    position: absolute;
+    left: 10px;
+    bottom: 30px;
+    z-index: 1000;
+  }
+  #compass img {
+    height: 50px;
+  }
+  

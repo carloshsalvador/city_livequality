@@ -72,6 +72,7 @@ function updateMap(data) {
       layer.bindPopup(`<b>${p.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
     }
   }).addTo(map);
+  L.control.scale({ imperial: false }).addTo(map);
 }
 
 fetch("data.geojson")
