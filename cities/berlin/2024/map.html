@@ -8,24 +8,62 @@
   <style>
     #map { height: 90vh; }
     .slider-container { padding: 10px; }
+    #legend-container {
+      position: absolute;
+      left: 10px;
+      top: 100px;
+      z-index: 1000;
+      background: white;
+      padding: 4px;
+      border-radius: 4px;
+    }
+    #legend-container img {
+      height: 200px;
+    }
+    #compass {
+      position: absolute;
+      left: 10px;
+      bottom: 30px;
+      z-index: 1000;
+    }
+    #compass img {
+      height: 50px;
+    }
   </style>
 </head>
 <body>
 
 <div class="slider-container">
-  <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valGreen">0.25</span><br/>
-  <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valSummer">0.25</span><br/>
-  <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valHot">0.25</span><br/>
-  <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="0.25" /></label>
-  <span id="valTrop">0.25</span>
+  <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valGreen">1.0</span><br/>
+  <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valSummer">1.0</span><br/>
+  <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valHot">1.0</span><br/>
+  <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0" /></label>
+  <span id="valTrop">1.0</span>
 </div>
 
 <div id="map"></div>
 
+<div id="legend-container">
+  <img src="/city_livequality/static/legend.png" alt="Legend">
+</div>
+
+<div id="compass">
+  <img src="/city_livequality/static/compass.png" alt="North">
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
+      const el = document.getElementById(id);
+      const valEl = document.getElementById("val" + id.slice(1));
+      valEl.innerText = el.value;
+    });
+  });
+</script>
 <script src="/city_livequality/static/script.js"></script>
 </body>
 </html>
