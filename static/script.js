@@ -55,6 +55,7 @@ function updateMap(data) {
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "© OpenStreetMap contributors"
     }).addTo(map);
+    L.control.scale({ imperial: false }).addTo(map);
   }
 
   if (geoLayer) map.removeLayer(geoLayer);
@@ -72,7 +73,7 @@ function updateMap(data) {
       layer.bindPopup(`<b>${p.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
     }
   }).addTo(map);
-  L.control.scale({ imperial: false }).addTo(map);
+  
 }
 
 fetch("data.geojson")
