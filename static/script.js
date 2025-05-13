@@ -35,7 +35,13 @@ function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {},
       console.error("Elemento #map não encontrado no DOM!");
       return;
     }
-    const center = data.meta?.map_center || [52.5, 13.4]; // usa os dados map_center da chave metadata do geojson ou a coord. de Berlin, em caso de não encontrar ou fallback
+    // const center = data.meta?.map_center || [52.5, 13.4]; // usa os dados map_center da chave metadata do geojson ou a coord. de Berlin, em caso de não encontrar ou fallback
+    // Converte o ponto central do GeoJSON para o formato [latitude, longitude]
+    const center = data.meta?.map_center
+    ? [data.meta.map_center[1], data.meta.map_center[0]] // Converte para [latitude, longitude]
+    : [52.5, 13.4]; // Fallback
+    
+    
     const zoom = data.meta?.map_zoom || 11; // usa os dados map_zoom da chave metadata do geojson ou valor padrão 11, em caso de não encontrar ou fallback
     map = L.map("map").setView(center, zoom);
   
@@ -91,3 +97,26 @@ document.getElementById("wTrop").addEventListener("input", () => {
   getWeights();
   updateMap(currentData);
 });
+
+const sampleGeoJSON = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.402313, 52.501493] // Coordenadas de Berlim
+      },
+      "properties": {
+        "name": "Sample Point",
+        "green_per_norm": 0.8,
+        "summerday_norm": 0.7,
+        "hotday_norm": 0.6,
+        "Tropicalnights_norm": 0.5
+      }
+    }
+  ]
+};
+
+// Substitua a chamada para updateMap com o GeoJSON mínimo
+updateMap(sampleGeoJSON);
