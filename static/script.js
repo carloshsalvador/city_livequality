@@ -13,18 +13,15 @@ function updateMap(data) {
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "© OpenStreetMap contributors"
     }).addTo(map);
-    L.control.scale({ imperial: false }).addTo(map);
+
+    // Adiciona o controle de escala apenas na inicialização do mapa
+    scaleControl = L.control.scale({ imperial: false }).addTo(map);
   }
 
-  // Remove o controle de escala existente, se houver
-  if (scaleControl) {
-    map.removeControl(scaleControl);
+  // Remove a camada GeoJSON existente, se houver
+  if (geoLayer) {
+    map.removeLayer(geoLayer);
   }
-
-  // Adiciona um novo controle de escala e armazena a referência
-  scaleControl = L.control.scale({ imperial: false }).addTo(map);
-
-  if (geoLayer) map.removeLayer(geoLayer);
 
   geoLayer = L.geoJSON(data, {
     style: feature => styleFeature(feature, weights),
