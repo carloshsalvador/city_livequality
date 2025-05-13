@@ -1,22 +1,17 @@
 console.log("Leaflet versão:", L);
+
 let map;
 let geoLayer = null;
 let scaleControl = null; // Adiciona uma variável para armazenar o controle de escala
 
-// function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
-function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
-  console.log("updateMap foi chamado", data); 
+let weights = {
+  green: 1.0,
+  summer: 1.0,
+  hot: 1.0,
+  trop: 1.0
+};
 
-  let weights = {
-    green: 1.0,
-    summer: 1.0,
-    hot: 1.0,
-    trop: 1.0
-  };
-
-  // const weights = getWeights(); // antigo, original, mantido como memória
-
-  let currentData = null; // Armazena os dados GeoJSON
+let currentData = null; // Armazena os dados GeoJSON
 
 function getWeights() {
   weights.green = parseFloat(document.getElementById("wGreen").value);
@@ -26,10 +21,10 @@ function getWeights() {
   console.log("Pesos atualizados:", weights);
 }
 
-function updateMap(data = { meta: {}, features: [] }) {
+// function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
+function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
   currentData = data; // Atualiza os dados globais
   console.log("updateMap foi chamado", data);
-
 
   updateSliderLabels();
 
@@ -47,11 +42,9 @@ function updateMap(data = { meta: {}, features: [] }) {
       attribution: "© OpenStreetMap contributors"
     }).addTo(map);
 
-    // Adiciona o controle de escala apenas na inicialização do mapa
     scaleControl = L.control.scale({ imperial: false }).addTo(map);
   }
 
-  // Remove a camada GeoJSON existente, se houver
   if (geoLayer) {
     map.removeLayer(geoLayer);
   }
