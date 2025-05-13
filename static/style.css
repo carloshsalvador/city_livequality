@@ -1,3 +1,15 @@
+#map {
+    width: 100%;
+    height: 90vh; /* Ocupa toda a altura da janela */
+  }
+  
+.slider-container {
+  padding: 10px;
+  background: white;
+  z-index: 1000;
+  position: relative;
+}
+
 #legend-container {
     position: absolute;
     left: 10px;
@@ -7,16 +19,19 @@
     padding: 4px;
     border-radius: 4px;
   }
-  #legend-container img {
+
+#legend-container img {
     height: 200px;
   }
-  #compass {
+
+#compass {
     position: absolute;
     left: 10px;
     bottom: 30px;
     z-index: 1000;
   }
-  #compass img {
-    height: 50px;
+
+#compass img {
+    height: 100px;
   }
   

@@ -3,10 +3,17 @@ let geoLayer = null;
 let scaleControl = null; // Adiciona uma variável para armazenar o controle de escala
 
 function updateMap(data) {
+  console.log("updateMap foi chamado", data);
   const weights = getWeights();
   updateSliderLabels();
 
   if (!map) {
+    const mapElement = document.getElementById("map");
+    console.log("Elemento #map encontrado:", mapElement);
+    if (!mapElement) {
+      console.error("Elemento #map não encontrado no DOM!");
+      return;
+    }
     const center = data.meta?.map_center || [52.5, 13.4];
     const zoom = data.meta?.map_zoom || 11;
     map = L.map("map").setView(center, zoom);
