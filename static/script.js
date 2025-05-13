@@ -7,7 +7,30 @@ let scaleControl = null; // Adiciona uma variável para armazenar o controle de 
 function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
   console.log("updateMap foi chamado", data); 
 
-  const weights = getWeights();
+  let weights = {
+    green: 1.0,
+    summer: 1.0,
+    hot: 1.0,
+    trop: 1.0
+  };
+
+  // const weights = getWeights(); // antigo, original, mantido como memória
+
+  let currentData = null; // Armazena os dados GeoJSON
+
+function getWeights() {
+  weights.green = parseFloat(document.getElementById("wGreen").value);
+  weights.summer = parseFloat(document.getElementById("wSummer").value);
+  weights.hot = parseFloat(document.getElementById("wHot").value);
+  weights.trop = parseFloat(document.getElementById("wTrop").value);
+  console.log("Pesos atualizados:", weights);
+}
+
+function updateMap(data = { meta: {}, features: [] }) {
+  currentData = data; // Atualiza os dados globais
+  console.log("updateMap foi chamado", data);
+
+
   updateSliderLabels();
 
   if (!map) {
@@ -48,29 +71,23 @@ function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {},
   }).addTo(map);
 }
 
-// Exemplo de chamada com dados válidos
-const sampleData = {
-  meta: {
-    map_center: [52.5, 13.4],
-    map_zoom: 11
-  },
-  features: [
-    {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [13.4, 52.5]
-      },
-      properties: {
-        name: "Sample Point",
-        green_per_norm: 0.8,
-        summerday_norm: 0.7,
-        hotday_norm: 0.6,
-        Tropicalnights_norm: 0.5
-      }
-    }
-  ]
-};
+// Adiciona eventos aos sliders
+document.getElementById("wGreen").addEventListener("input", () => {
+  getWeights();
+  updateMap(currentData);
+});
 
-// Chama a função updateMap com os dados de exemplo
-updateMap(sampleData);
+document.getElementById("wSummer").addEventListener("input", () => {
+  getWeights();
+  updateMap(currentData);
+});
+
+document.getElementById("wHot").addEventListener("input", () => {
+  getWeights();
+  updateMap(currentData);
+});
+
+document.getElementById("wTrop").addEventListener("input", () => {
+  getWeights();
+  updateMap(currentData);
+});
