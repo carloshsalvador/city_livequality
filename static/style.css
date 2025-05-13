@@ -12,8 +12,8 @@
 
 #legend-container {
     position: absolute;
-    left: 10px;
-    top: 100px;
+    left: 20px;
+    top: 180px;
     z-index: 1000;
     background: white;
     padding: 4px;

@@ -35,11 +35,18 @@ function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {},
       console.error("Elemento #map não encontrado no DOM!");
       return;
     }
-    const center = data.meta?.map_center || [52.5, 13.4];
-    const zoom = data.meta?.map_zoom || 11;
+    const center = data.meta?.map_center || [52.5, 13.4]; // usa os dados map_center da chave metadata do geojson ou a coord. de Berlin, em caso de não encontrar ou fallback
+    const zoom = data.meta?.map_zoom || 11; // usa os dados map_zoom da chave metadata do geojson ou valor padrão 11, em caso de não encontrar ou fallback
     map = L.map("map").setView(center, zoom);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors"
+  
+    // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    //   attribution: "© OpenStreetMap contributors"
+    // }).addTo(map);
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 19
     }).addTo(map);
 
     scaleControl = L.control.scale({ imperial: false }).addTo(map);
