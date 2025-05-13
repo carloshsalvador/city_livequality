@@ -1,9 +1,12 @@
+console.log("Leaflet versão:", L);
 let map;
 let geoLayer = null;
 let scaleControl = null; // Adiciona uma variável para armazenar o controle de escala
 
-function updateMap(data) {
-  console.log("updateMap foi chamado", data);
+// function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
+function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
+  console.log("updateMap foi chamado", data); 
+
   const weights = getWeights();
   updateSliderLabels();
 
@@ -44,3 +47,30 @@ function updateMap(data) {
     }
   }).addTo(map);
 }
+
+// Exemplo de chamada com dados válidos
+const sampleData = {
+  meta: {
+    map_center: [52.5, 13.4],
+    map_zoom: 11
+  },
+  features: [
+    {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [13.4, 52.5]
+      },
+      properties: {
+        name: "Sample Point",
+        green_per_norm: 0.8,
+        summerday_norm: 0.7,
+        hotday_norm: 0.6,
+        Tropicalnights_norm: 0.5
+      }
+    }
+  ]
+};
+
+// Chama a função updateMap com os dados de exemplo
+updateMap(sampleData);

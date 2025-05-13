@@ -5,7 +5,8 @@
   <title>Life Quality Index – Berlin 2024</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="../../static/style.css" /> <!-- com "href="/city_livequality/static/style.css"" só funciona no Github, mas com href="../../static/style.css" funciona local e no github e é bom para testar localmente! -->
+  <link rel="icon" href="/path/to/favicon.ico" /> <!--para evitar o problema de aviso no F12/console-->
 </head>
 <body>
 
@@ -23,11 +24,11 @@
 <div id="map"></div>
 
 <div id="legend-container">
-  <img src="/static/legend.png" alt="Legend">
+  <img src="../../static/legend.png" alt="Legend">
 </div>
 
 <div id="compass">
-  <img src="/static/compass.png" alt="North">
+  <img src="../../static/compass.png" alt="North">
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
@@ -40,6 +41,6 @@
     });
   });
 </script>
-<script src="/static/script.js"></script>
+<script src="../../static/script.js"></script>
 </body>
 </html>
