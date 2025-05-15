@@ -21,19 +21,24 @@ function getWeights() {
   console.log("Pesos atualizados:", weights);
 }
 
+
+  //...updateSliderLabels implementada aqui, mas chamada dentro do updateMap().
+  // se removar aqui, tem que remover tbm no updateMap.
+  function updateSliderLabels() {
+    document.getElementById("valGreen").innerText = weights.green.toFixed(2);
+    document.getElementById("valSummer").innerText = weights.summer.toFixed(2);
+    document.getElementById("valHot").innerText = weights.hot.toFixed(2);
+    document.getElementById("valTrop").innerText = weights.trop.toFixed(2);
+  }
+
+
+
 // function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
 function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
   currentData = data; // Atualiza os dados globais
   console.log("updateMap foi chamado", data);
 
-  //updateSliderLabels();
-  //...ou implementar a função updateSliderLabels aqui, se necessário:
-  // function updateSliderLabels() {
-  //   document.getElementById("valGreen").innerText = weights.green.toFixed(2);
-  //   document.getElementById("valSummer").innerText = weights.summer.toFixed(2);
-  //   document.getElementById("valHot").innerText = weights.hot.toFixed(2);
-  //   document.getElementById("valTrop").innerText = weights.trop.toFixed(2);
-  // }
+  updateSliderLabels();   //...updateSliderLabels implementada aqui
 
   if (!map) {
     const mapElement = document.getElementById("map");
