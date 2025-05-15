@@ -34,4 +34,17 @@
 #compass img {
     height: 100px;
   }
+
+  /* controle dos mapas */
+  #controls {
+    margin-bottom: 20px;
+  }
+  
+  #controls label {
+    margin-right: 10px;
+  }
+  
+  #controls select, #controls button {
+    margin-right: 15px;
+  }
   

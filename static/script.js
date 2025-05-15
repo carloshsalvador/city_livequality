@@ -148,9 +148,21 @@ document.getElementById("wTrop").addEventListener("input", () => {
 // updateMap(sampleGeoJSON); // Substitua a chamada para updateMap com o GeoJSON mínimo
 
 // para plotar o geojson completo, descomentar a linha abaixo e comentar a linha acima:
-fetch('/city_livequality/cities/berlin/2024/data.geojson')
-  .then(response => response.json())
-  .then(data => {
-    updateMap(data);
-  })
-  .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
+document.getElementById("loadMap").addEventListener("click", () => {
+  const city = document.getElementById("city").value;
+  const year = document.getElementById("year").value;
+
+  const geojsonPath = `/city_livequality/cities/${city}/${year}/data.geojson`;
+
+  fetch(geojsonPath)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro ao carregar o GeoJSON: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      updateMap(data);
+    })
+    .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
+});
