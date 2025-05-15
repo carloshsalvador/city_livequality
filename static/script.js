@@ -149,22 +149,27 @@ document.getElementById("wTrop").addEventListener("input", () => {
 
 // para plotar o geojson completo, descomentar a linha abaixo e comentar a linha acima:
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("loadMap").addEventListener("click", () => {
-    const city = document.getElementById("city").value;
-    const year = document.getElementById("year").value;
+  const loadMapButton = document.getElementById("loadMap");
+  if (loadMapButton) {
+    loadMapButton.addEventListener("click", () => {
+      const city = document.getElementById("city").value;
+      const year = document.getElementById("year").value;
 
-    const geojsonPath = `/city_livequality/cities/${city}/${year}/data.geojson`;
+      const geojsonPath = `/city_livequality/cities/${city}/${year}/data.geojson`;
 
-    fetch(geojsonPath)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erro ao carregar o GeoJSON: ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        updateMap(data);
-      })
-      .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
-  });
+      fetch(geojsonPath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erro ao carregar o GeoJSON: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          updateMap(data);
+        })
+        .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
+    });
+  } else {
+    console.error("Botão 'loadMap' não encontrado no DOM.");
+  }
 });

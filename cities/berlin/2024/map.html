@@ -9,38 +9,57 @@
   <link rel="icon" href="/path/to/favicon.ico" /> <!--para evitar o problema de aviso no F12/console-->
 </head>
 <body>
+  
 
-<div class="slider-container">
-  <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0" /></label>
-  <span id="valGreen">1.0</span><br/>
-  <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0" /></label>
-  <span id="valSummer">1.0</span><br/>
-  <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0" /></label>
-  <span id="valHot">1.0</span><br/>
-  <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0" /></label>
-  <span id="valTrop">1.0</span>
-</div>
+  <div class="slider-container">
+    <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0" /></label>
+    <span id="valGreen">1.0</span><br/>
+    <label>Summer Weight: <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0" /></label>
+    <span id="valSummer">1.0</span><br/>
+    <label>Hot Days Weight: <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0" /></label>
+    <span id="valHot">1.0</span><br/>
+    <label>Tropical Nights Weight: <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0" /></label>
+    <span id="valTrop">1.0</span>
+  </div>
 
-<div id="map"></div>
+  <div id="map" style="height: 500px;"></div>
 
-<div id="legend-container">
-  <img src="/city_livequality/static/legend.png" alt="Legend">
-</div>
+  <div id="controls">
+    <label for="city">City:</label>
+    <select id="city">
+      <option value="berlin">Berlin</option>
+      <option value="florianopolis">Florianópolis</option>
+    </select>
 
-<div id="compass">
-  <img src="/city_livequality/static/compass.png" alt="North">
-</div>
+    <label for="year">Year:</label>
+    <select id="year">
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+    </select>
 
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
-      const el = document.getElementById(id);
-      const valEl = document.getElementById("val" + id.slice(1));
-      valEl.innerText = el.value;
+    <button id="loadMap">Load Map</button>
+  </div>
+
+  <div id="legend-container">
+    <img src="/city_livequality/static/legend.png" alt="Legend">
+  </div>
+
+  <div id="compass">
+    <img src="/city_livequality/static/compass.png" alt="North">
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
+        const el = document.getElementById(id);
+        const valEl = document.getElementById("val" + id.slice(1));
+        valEl.innerText = el.value;
+      });
     });
-  });
-</script>
-<script src="/city_livequality/static/script.js"></script>
+    
+  </script>
+  <script src="/city_livequality/static/script.js"></script>
 </body>
 </html>
