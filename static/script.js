@@ -25,10 +25,10 @@ function getWeights() {
   //...updateSliderLabels implementada aqui, mas chamada dentro do updateMap().
   // se removar aqui, tem que remover tbm no updateMap.
   function updateSliderLabels() {
-    document.getElementById("valGreen").innerText = weights.green.toFixed(2);
-    document.getElementById("valSummer").innerText = weights.summer.toFixed(2);
-    document.getElementById("valHot").innerText = weights.hot.toFixed(2);
-    document.getElementById("valTrop").innerText = weights.trop.toFixed(2);
+    document.getElementById("wGreen").innerText = weights.green.toFixed(2);
+    document.getElementById("wSummer").innerText = weights.summer.toFixed(2);
+    document.getElementById("wHot").innerText = weights.hot.toFixed(2);
+    document.getElementById("wTrop").innerText = weights.trop.toFixed(2);
   }
 
 
@@ -110,25 +110,33 @@ document.getElementById("wTrop").addEventListener("input", () => {
   updateMap(currentData);
 });
 
-const sampleGeoJSON = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [13.402313, 52.501493] // Coordenadas de Berlim
-      },
-      "properties": {
-        "name": "Sample Point",
-        "green_per_norm": 0.8,
-        "summerday_norm": 0.7,
-        "hotday_norm": 0.6,
-        "Tropicalnights_norm": 0.5
-      }
-    }
-  ]
-};
+// para testar se data.geojson tem problema, primeiro testar o mapa ccom um geojson mínimo, depois testar o geojson completo.
+// GeoJSON mínimo para teste:
+// const sampleGeoJSON = {
+//   "type": "FeatureCollection",
+//   "features": [
+//     {
+//       "type": "Feature",
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [13.402313, 52.501493] // Coordenadas de Berlim
+//       },
+//       "properties": {
+//         "name": "Sample Point",
+//         "green_per_norm": 0.8,
+//         "summerday_norm": 0.7,
+//         "hotday_norm": 0.6,
+//         "Tropicalnights_norm": 0.5
+//       }
+//     }
+//   ]
+// };
+// updateMap(sampleGeoJSON); // Substitua a chamada para updateMap com o GeoJSON mínimo
 
-// Substitua a chamada para updateMap com o GeoJSON mínimo
-updateMap(sampleGeoJSON);
+// para plotar o geojson completo, descomentar a linha abaixo e comentar a linha acima:
+fetch('/city_livequality/cities/berlin/2024/data.geojson')
+  .then(response => response.json())
+  .then(data => {
+    updateMap(data);
+  })
+  .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
