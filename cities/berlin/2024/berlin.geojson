@@ -3,8 +3,8 @@
     "norm_method": "MinMax",
     "norm_ref_year": 2024,
     "map_center": [
-      52.501493,
-      13.402313
+      13.402313,
+      52.501493
     ],
     "map_zoom": 11,
     "description": {
