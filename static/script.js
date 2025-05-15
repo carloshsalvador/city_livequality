@@ -31,7 +31,27 @@ function getWeights() {
     document.getElementById("wTrop").innerText = weights.trop.toFixed(2);
   }
 
+function calculateLQI(properties, weights) {
+  return (
+    (weights.green * properties.green_per_norm +
+      weights.summer * properties.summerday_norm +
+      weights.hot * properties.hotday_norm +
+      weights.trop * properties.Tropicalnights_norm) /
+    (weights.green + weights.summer + weights.hot + weights.trop)
+  );
+}
 
+function styleFeature(feature, weights) {
+  const lqi = calculateLQI(feature.properties, weights);
+
+  return {
+    fillColor: lqi > 0.7 ? "#2ECC71" : lqi > 0.4 ? "#F1C40F" : "#E74C3C", // Verde, amarelo ou vermelho
+    weight: 2,
+    opacity: 1,
+    color: "white",
+    fillOpacity: 0.7
+  };
+}
 
 // function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
 function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
@@ -77,14 +97,8 @@ function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {},
   geoLayer = L.geoJSON(data, {
     style: feature => styleFeature(feature, weights),
     onEachFeature: (feature, layer) => {
-      const p = feature.properties;
-      const lqi = (
-        weights.green * p.green_per_norm +
-        weights.summer * p.summerday_norm +
-        weights.hot * p.hotday_norm +
-        weights.trop * p.Tropicalnights_norm
-      ) / (weights.green + weights.summer + weights.hot + weights.trop);
-      layer.bindPopup(`<b>${p.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
+      const lqi = calculateLQI(feature.properties, weights);
+      layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
     }
   }).addTo(map);
 }
@@ -140,4 +154,3 @@ fetch('/city_livequality/cities/berlin/2024/data.geojson')
     updateMap(data);
   })
   .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
-  
