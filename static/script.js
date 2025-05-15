@@ -22,14 +22,14 @@ function getWeights() {
 }
 
 
-  //...updateSliderLabels implementada aqui, mas chamada dentro do updateMap().
-  // se removar aqui, tem que remover tbm no updateMap.
-  function updateSliderLabels() {
-    document.getElementById("wGreen").innerText = weights.green.toFixed(2);
-    document.getElementById("wSummer").innerText = weights.summer.toFixed(2);
-    document.getElementById("wHot").innerText = weights.hot.toFixed(2);
-    document.getElementById("wTrop").innerText = weights.trop.toFixed(2);
-  }
+//...updateSliderLabels implementada aqui, mas chamada dentro do updateMap().
+// se removar aqui, tem que remover tbm no updateMap.
+function updateSliderLabels() {
+  document.getElementById("wGreen").innerText = weights.green.toFixed(2);
+  document.getElementById("wSummer").innerText = weights.summer.toFixed(2);
+  document.getElementById("wHot").innerText = weights.hot.toFixed(2);
+  document.getElementById("wTrop").innerText = weights.trop.toFixed(2);
+}
 
 function calculateLQI(properties, weights) {
   return (
