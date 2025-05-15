@@ -140,3 +140,4 @@ fetch('/city_livequality/cities/berlin/2024/data.geojson')
     updateMap(data);
   })
   .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
+  
