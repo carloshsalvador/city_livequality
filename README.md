@@ -6,15 +6,19 @@ Project based on the UN's project [UN-Habitat](https://unhabitat.org/) "A better
 
 explantion here...
 
-Life quality has many components like a "Periodic Table" (sensu UN-Habitat):
+Life quality has many components like a "Periodic Table" (_sensu_ UN-Habitat):
 
-<img src="assets/image/unhabitat_cityquality_periodic_table_from_facebook.jpg" alt="Life Quality Periodic Table" width="300" title="Life Quality Periodic Table (UN-Habitat)"> (Font: [UN Habitat on Facebook](https://www.facebook.com/profile/100064592777988/search/?q=periodic%20table))
+<img src="assets/image/unhabitat_cityquality_periodic_table_from_facebook.jpg" alt="Life Quality Periodic Table" width="300" title="Life Quality Periodic Table (UN-Habitat)"> 
+
+(Font: [UN Habitat on Facebook](https://www.facebook.com/profile/100064592777988/search/?q=periodic%20table))
 
 
 
 ## Available cities and year
-- Berlin (Germany): 2024 and 2025
+- Berlin (Germany): [2024*](https://carloshsalvador.github.io/city_lifequality/cities/berlin/2024/map.html) and 2025
 - Florianópolis (Brazil): 2024 and 2025
+
+```* Rull immplemented as example. The others are still at work.``` 
 
 
 
