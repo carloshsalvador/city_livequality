@@ -18,7 +18,7 @@ Life quality has many components like a "Periodic Table" (_sensu_ UN-Habitat):
 - Berlin (Germany): [2024*](https://carloshsalvador.github.io/city_lifequality/cities/berlin/2024/map.html) and 2025
 - Florianópolis (Brazil): 2024 and 2025
 
-```* Rull immplemented as example. The others are still at work.``` 
+```* Full immplemented as example. The others are still at work.``` 
 
 
 
