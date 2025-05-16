@@ -8,7 +8,7 @@ explantion here...
 
 Life quality has many components like a "Periodic Table" (sensu UN-Habitat):
 
-![Life Quality Periodic Table](assets\image\unhabitat_cityquality_periodic_table_from_facebook.jpg) (Font: [UN Habitat on Facebook](https://www.facebook.com/profile/100064592777988/search/?q=periodic%20table))
+<img src="assets/image/unhabitat_cityquality_periodic_table_from_facebook.jpg" alt="Life Quality Periodic Table" width="600" title="Life Quality Periodic Table (UN-Habitat)"> (Font: [UN Habitat on Facebook](https://www.facebook.com/profile/100064592777988/search/?q=periodic%20table))
 
 
 
