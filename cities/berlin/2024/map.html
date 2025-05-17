@@ -5,12 +5,13 @@
   <title>Life Quality Index – Berlin 2024</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <link rel="stylesheet" href="/city_livequality/static/style.css" /> <!-- com "href="/city_livequality/static/style.css"" só funciona no Github, mas com href="../../static/style.css" funciona local e no github e é bom para testar localmente! -->
-  <link rel="icon" href="/path/to/favicon.ico" /> <!--para evitar o problema de aviso no F12/console-->
+  <link rel="stylesheet" href="../../static/style.css" /> <!-- Caminho relativo para funcionar localmente e no GitHub Pages -->
+  <link rel="icon" href="/path/to/favicon.ico" /> <!-- Para evitar avisos no console -->
 </head>
 <body>
-  
+  <h1>Life Quality Index – Berlin 2024</h1>
 
+  <!-- Sliders para ajustar os pesos -->
   <div class="slider-container">
     <label>Green Weight: <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0" /></label>
     <span id="valGreen">1.0</span><br/>
@@ -22,35 +23,23 @@
     <span id="valTrop">1.0</span>
   </div>
 
+  <!-- Mapa -->
   <div id="map" style="height: 500px;"></div>
 
-  <div id="controls">
-    <label for="city">City:</label>
-    <select id="city">
-      <option value="berlin">Berlin</option>
-      <option value="florianopolis">Florianópolis</option>
-    </select>
-
-    <label for="year">Year:</label>
-    <select id="year">
-      <option value="2024">2024</option>
-      <option value="2025">2025</option>
-    </select>
-
-    <button id="loadMap">Load Map</button>
-  </div>
-
+  <!-- Legenda -->
   <div id="legend-container">
-    <img src="/city_livequality/static/legend.png" alt="Legend">
+    <img src="../../static/legend.png" alt="Legend">
   </div>
 
+  <!-- Bússola -->
   <div id="compass">
-    <img src="/city_livequality/static/compass.png" alt="North">
+    <img src="../../static/compass.png" alt="North">
   </div>
 
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-
   <script>
+    // Atualiza os valores dos sliders ao carregar a página
     window.addEventListener("DOMContentLoaded", () => {
       ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
         const el = document.getElementById(id);
@@ -58,8 +47,7 @@
         valEl.innerText = el.value;
       });
     });
-    
   </script>
-  <script src="/city_livequality/static/script.js"></script>
+  <script src="../../static/script.js"></script> <!-- Caminho relativo para o script.js -->
 </body>
 </html>
