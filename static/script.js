@@ -23,7 +23,7 @@ function getWeights() {
 
 
 //...updateSliderLabels implementada aqui, mas chamada dentro do updateMap().
-// se removar aqui, tem que remover tbm no updateMap.
+// se remover aqui, tem que remover tbm no updateMap.
 function updateSliderLabels() {
   document.getElementById("wGreen").innerText = weights.green.toFixed(2);
   document.getElementById("wSummer").innerText = weights.summer.toFixed(2);
@@ -54,7 +54,7 @@ function styleFeature(feature, weights) {
 }
 
 // function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
-function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback!? Adiciona um valor padrão para data para evitar erros quando não encontra dados.
+function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback! Adiciona um valor padrão para data para evitar erros quando não encontra dados.
   currentData = data; // Atualiza os dados globais
   console.log("updateMap foi chamado", data);
 
