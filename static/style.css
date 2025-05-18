@@ -1,8 +1,9 @@
 #map {
   height: 500px; /* Altura fixa */
   width: 100%;   /* Largura total */
-  margin: 0 auto; /* Centralizar, se necessário */
-  border: 1px solid #ccc; /* Opcional: borda para visualização */
+  margin: 0 auto; /* Centralizar */
+  position: relative; /* Garante que o mapa não seja sobreposto */
+  overflow: hidden; /* Evita problemas de renderização */
 }
   
 .slider-container {

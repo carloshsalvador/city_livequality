@@ -53,55 +53,87 @@ function styleFeature(feature, weights) {
   };
 }
 
-// function updateMap(data) { // codigo original sem fallback mantida aqui como memória! se não houver dados, não faz nada. ver alternativa com fallback:
-function updateMap(data = { meta: {}, features: [] }) { // """data = { meta: {}, features: [] }""" ao invés de só "data" é o fallback! Adiciona um valor padrão para data para evitar erros quando não encontra dados.
-  currentData = data; // Atualiza os dados globais
+
+function updateMap(data) {
   console.log("updateMap foi chamado", data);
 
-  updateSliderLabels();   //...updateSliderLabels implementada aqui
+  // Atualiza os dados globais
+  currentData = data;
 
+  // Atualiza os rótulos dos sliders
+  updateSliderLabels();
+
+  // Verifica se o mapa já foi inicializado
   if (!map) {
     const mapElement = document.getElementById("map");
-    console.log("Elemento #map encontrado:", mapElement);
     if (!mapElement) {
       console.error("Elemento #map não encontrado no DOM!");
       return;
     }
-    // const center = data.meta?.map_center || [52.5, 13.4]; // usa os dados map_center da chave metadata do geojson ou a coord. de Berlin, em caso de não encontrar ou fallback
-    // Converte o ponto central do GeoJSON para o formato [latitude, longitude]
-    const center = data.meta?.map_center
-    ? [data.meta.map_center[1], data.meta.map_center[0]] // Converte para [latitude, longitude]
-    : [52.5, 13.4]; // Fallback
-    
-    
-    const zoom = data.meta?.map_zoom || 11; // usa os dados map_zoom da chave metadata do geojson ou valor padrão 11, em caso de não encontrar ou fallback
-    map = L.map("map").setView(center, zoom);
-  
-    // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    //   attribution: "© OpenStreetMap contributors"
-    // }).addTo(map);
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: "abcd",
-      maxZoom: 19
+    // Define o centro inicial e o zoom como fallback
+    const center = data.meta?.map_center
+      ? [data.meta.map_center[1], data.meta.map_center[0]] // Converte para [latitude, longitude]
+      : [52.5, 13.4]; // Fallback para Berlim
+    const zoom = data.meta?.map_zoom || 11;
+
+
+
+    // Inicializa o mapa
+    map = L.map("map", {
+      center: center,
+      zoom: zoom,
+      //crs: L.CRS.EPSG3857 // CRS padrão do Leaflet
+    });
+
+    // Adiciona o tile layer (OSM)
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+      maxZoom: 19,
     }).addTo(map);
 
+    // L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    //   subdomains: "abcd",
+    //   maxZoom: 19
+    // }).addTo(map);
+
+    // Adiciona controle de escala
     scaleControl = L.control.scale({ imperial: false }).addTo(map);
+
+    // Log do centro do mapa após inicialização
+    console.log("Coordenadas do centro do mapa (após inicialização):", map.getCenter());
   }
 
+  // Remove a camada GeoJSON anterior, se existir
   if (geoLayer) {
     map.removeLayer(geoLayer);
   }
 
+  // Adiciona a nova camada GeoJSON
   geoLayer = L.geoJSON(data, {
-    style: feature => styleFeature(feature, weights),
+    style: (feature) => styleFeature(feature, weights),
     onEachFeature: (feature, layer) => {
       const lqi = calculateLQI(feature.properties, weights);
-      layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
-    }
+      layer.bindPopup(
+        `<b>${feature.properties.name || "Área"}</b><br>LQI: ${lqi.toFixed(3)}`
+      );
+    },
   }).addTo(map);
+
+  // Ajusta o mapa para caber no GeoJSON
+  if (data.features.length > 0) {
+    const bounds = geoLayer.getBounds();
+    map.fitBounds(bounds); // Ajusta o mapa para os bounds do GeoJSON
+    console.log("Bounds ajustados para o GeoJSON:", bounds);
+  } else {
+    console.warn("GeoJSON não contém features. Usando centro inicial.");
+  }
+
+  // Log do centro do mapa após ajustar os bounds
+  console.log("Coordenadas do centro do mapa (após ajustar bounds):", map.getCenter());
 }
+
 
 // Adiciona eventos aos sliders
 document.getElementById("wGreen").addEventListener("input", () => {
