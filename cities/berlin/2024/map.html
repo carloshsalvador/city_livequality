@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <title>Life Quality Index – Berlin 2024</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <link rel="stylesheet" href="/city_lifequality/static/style.css" />
-  <link rel="icon" href="/city_lifequality/static/favicon.ico" />
+  <link rel="stylesheet" href="../../../static/style.css" />
+  <link rel="icon" href="../../../static/favicon.ico" />
 </head>
 <body>
   <h1>Life Quality Index – Berlin 2024</h1>
@@ -28,12 +27,12 @@
 
   <!-- Legenda -->
   <div id="legend-container">
-    <img src="/city_lifequality/static/legend.png" alt="Legend">
+    <img src="../../../static/legend.png" alt="Legend">
   </div>
 
   <!-- Bússola -->
   <div id="compass">
-    <img src="/city_lifequality/static/compass.png" alt="North">
+    <img src="../../../static/compass.png" alt="North">
   </div>
 
   <!-- Scripts -->
@@ -48,7 +47,7 @@
       });
 
       // Carrega o GeoJSON específico para Berlin 2024
-      const geojsonPath = "/city_lifequality/cities/berlin/2024/data.geojson";
+      const geojsonPath = "data.geojson";
 
       fetch(geojsonPath)
         .then(response => {
@@ -63,6 +62,6 @@
         .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
     });
   </script>
-  <script src="/city_lifequality/static/script.js"></script>
+  <script src="../../../static/script.js"></script>
 </body>
 </html>
