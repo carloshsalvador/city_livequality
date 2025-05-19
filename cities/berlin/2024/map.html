@@ -5,19 +5,9 @@
   <title>Life Quality Index – Berlin 2024</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../../static/style.css" />
-  <link rel="icon" href="../../../static/favicon.ico" type="image/x-icon">
-
-  <style> /* styles to complement #map at css */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-
-
-
+  <link rel="icon" href="../../../static/favicon.ico" type="image/x-icon" />
 </head>
+
 <body>
   <h1>Life Quality Index – Berlin 2024</h1>
 
@@ -47,21 +37,21 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="../../../static/script.js"></script>
   <script>
-    // Atualiza os valores dos sliders ao carregar a página
     window.addEventListener("DOMContentLoaded", () => {
+      // Atualiza os valores dos sliders ao carregar a página
       ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
         const el = document.getElementById(id);
         const valEl = document.getElementById("val" + id.slice(1));
-        valEl.innerText = el.value;
+        if (el && valEl) {
+          valEl.innerText = el.value;
+        }
       });
 
       // Carrega o GeoJSON específico para Berlin 2024
-      const geojsonPath = "data.geojson";
-
-      fetch(geojsonPath)
+      fetch("data.geojson")
         .then(response => {
           if (!response.ok) {
             throw new Error(`Erro ao carregar o GeoJSON: ${response.statusText}`);
@@ -69,11 +59,12 @@
           return response.json();
         })
         .then(data => {
-          updateMap(data); // Função definida no script.js
+          console.log("GeoJSON carregado:", data);
+          updateMap(data);
         })
         .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
     });
   </script>
-  
+
 </body>
 </html>

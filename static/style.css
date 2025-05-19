@@ -1,19 +1,35 @@
-#map {
-  height: 80vh; /* 500px for fix height or 80vh for relativ heigh*/
-  width: 100%;   /* Largura total */
-  margin: 0 auto; /* Centralizar */
-  position: relative; /* Garante que o mapa não seja sobreposto */
-  overflow: hidden; /* Evita problemas de renderização */
+/* Área do mapa */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 #map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
+
 .leaflet-tile-pane, .leaflet-overlay-pane {
   z-index: 100;
 }
 
-  
+/* Estilo adicional para garantir que os polígonos GeoJSON fiquem visíveis */
+.leaflet-overlay-pane svg path {
+  pointer-events: auto !important;
+  display: inline !important;
+  fill-opacity: 1 !important;
+  stroke: white !important;
+  stroke-width: 2;
+}
+
+/* Sliders */
 .slider-container {
   padding: 10px;
   background: white;
@@ -21,41 +37,43 @@
   position: relative;
 }
 
+/* Legenda */
 #legend-container {
-    position: absolute;
-    left: 20px;
-    top: 180px;
-    z-index: 1000;
-    background: white;
-    padding: 4px;
-    border-radius: 4px;
-  }
+  position: absolute;
+  left: 20px;
+  top: 180px;
+  z-index: 1000;
+  background: white;
+  padding: 4px;
+  border-radius: 4px;
+}
 
 #legend-container img {
-    height: 200px;
-  }
+  height: 200px;
+}
 
+/* Bússola */
 #compass {
-    position: absolute;
-    left: 10px;
-    bottom: 30px;
-    z-index: 1000;
-  }
+  position: absolute;
+  left: 10px;
+  bottom: 30px;
+  z-index: 1000;
+}
 
 #compass img {
-    height: 100px;
-  }
+  height: 100px;
+}
 
-  /* controle dos mapas */
-  #controls {
-    margin-bottom: 20px;
-  }
-  
-  #controls label {
-    margin-right: 10px;
-  }
-  
-  #controls select, #controls button {
-    margin-right: 15px;
-  }
-  
+/* Controle dos mapas */
+#controls {
+  margin-bottom: 20px;
+}
+
+#controls label {
+  margin-right: 10px;
+}
+
+#controls select,
+#controls button {
+  margin-right: 15px;
+}
