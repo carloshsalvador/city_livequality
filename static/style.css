@@ -1,10 +1,18 @@
 #map {
-  height: 500px; /* Altura fixa */
+  height: 80vh; /* 500px for fix height or 80vh for relativ heigh*/
   width: 100%;   /* Largura total */
   margin: 0 auto; /* Centralizar */
   position: relative; /* Garante que o mapa não seja sobreposto */
   overflow: hidden; /* Evita problemas de renderização */
 }
+
+#map {
+  z-index: 0;
+}
+.leaflet-tile-pane, .leaflet-overlay-pane {
+  z-index: 100;
+}
+
   
 .slider-container {
   padding: 10px;

@@ -5,7 +5,18 @@
   <title>Life Quality Index – Berlin 2024</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../../../static/style.css" />
-  <link rel="icon" href="../../../static/favicon.ico" />
+  <link rel="icon" href="../../../static/favicon.ico" type="image/x-icon">
+
+  <style> /* styles to complement #map at css */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+
+
 </head>
 <body>
   <h1>Life Quality Index – Berlin 2024</h1>
@@ -37,6 +48,7 @@
 
   <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="../../../static/script.js"></script>
   <script>
     // Atualiza os valores dos sliders ao carregar a página
     window.addEventListener("DOMContentLoaded", () => {
@@ -62,6 +74,6 @@
         .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
     });
   </script>
-  <script src="../../../static/script.js"></script>
+  
 </body>
 </html>

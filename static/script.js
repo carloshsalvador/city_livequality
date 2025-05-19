@@ -87,15 +87,33 @@ function updateMap(data) {
     });
 
     // Adiciona o tile layer (OSM)
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-      maxZoom: 19,
+    // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    //   attribution: "© OpenStreetMap contributors",
+    //   maxZoom: 19,
+    // }).addTo(map);
+
+    // L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; OSM contributors'
+    //   }).addTo(map);
+
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution: '&copy; OSM contributors'
     }).addTo(map);
+    
+    tileLayer.on('load', function () {
+      console.log("Todos os tiles carregados.");
+    });
+    
 
     // L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
     //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
     //   subdomains: "abcd",
     //   maxZoom: 19
+    // }).addTo(map);
+
+    // L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png", {
+    //   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://openstreetmap.org">OpenStreetMap</a>',
+    //   maxZoom: 20,
     // }).addTo(map);
 
     // Adiciona controle de escala
@@ -155,6 +173,11 @@ document.getElementById("wTrop").addEventListener("input", () => {
   getWeights();
   updateMap(currentData);
 });
+
+setTimeout(() => {
+  map.invalidateSize();
+  console.log("map.invalidateSize() chamado após delay");
+}, 500);
 
 // para testar se data.geojson tem problema, primeiro testar o mapa ccom um geojson mínimo, depois testar o geojson completo.
 // GeoJSON mínimo para teste:
