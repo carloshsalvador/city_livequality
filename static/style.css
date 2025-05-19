@@ -2,8 +2,9 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: auto; /* Permite rolagem ... before was 'hidden' but with problem!*/
 }
+
 
 #map {
   position: absolute;
@@ -29,15 +30,49 @@ html, body {
   stroke-width: 2;
 }
 
-/* Sliders */
+
+
+#top-bar {
+  position: absolute;
+  top: 75px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 1000;
+}
+
+/* Mantém a aparência dos sliders */
+.slider-container {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+
+/* Ajuste da legenda horizontal */
+#legend-container {
+  background: white;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+#legend-container img {
+  width: 300px;
+  height: auto;
+}
+
+/* Sliders 
 .slider-container {
   padding: 10px;
   background: white;
   z-index: 1000;
   position: relative;
-}
+} */
 
-/* Legenda */
+
+/* Legenda 
 #legend-container {
   position: absolute;
   left: 20px;
@@ -46,13 +81,14 @@ html, body {
   background: white;
   padding: 4px;
   border-radius: 4px;
-}
+} */
 
+/*
 #legend-container img {
   height: 200px;
-}
+} */
 
-/* Bússola */
+/* Compass */
 #compass {
   position: absolute;
   left: 10px;
@@ -61,7 +97,7 @@ html, body {
 }
 
 #compass img {
-  height: 100px;
+  height: 90px;
 }
 
 /* Controle dos mapas */

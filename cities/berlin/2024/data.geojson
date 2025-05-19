@@ -7,6 +7,8 @@
       52.501493
     ],
     "map_zoom": 11,
+    "map_tile": "none",
+    "map_tile_overlay": true,
     "description": {
       "green_per": "Raw: green_per, Normalised: green_per_norm",
       "summerday": "Raw: summerday, Normalised: summerday_norm",
@@ -15,6 +17,7 @@
     }
   },
   "type": "FeatureCollection",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
   "features": [
     {
       "type": "Feature",

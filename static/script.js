@@ -26,7 +26,6 @@ function getWeights() {
   console.log("Pesos atualizados:", weights);
 }
 
-
 function updateSliderLabels() {
   const greenLabel = document.getElementById("valGreen");
   const summerLabel = document.getElementById("valSummer");
@@ -49,10 +48,32 @@ function calculateLQI(properties, weights) {
   );
 }
 
+// function styleFeature(feature, weights) {
+//   const lqi = calculateLQI(feature.properties, weights);
+//   return {
+//     fillColor: lqi > 0.7 ? "#2ECC71" : lqi > 0.4 ? "#F1C40F" : "#E74C3C",
+//     weight: 2,
+//     opacity: 1,
+//     color: "white",
+//     fillOpacity: 0.7
+//   };
+// }
+
+function getContinuousColor(lqi) {
+  // Clamp entre 0.0 e 1.0
+  const value = Math.max(0, Math.min(1, lqi));
+
+  const r = Math.round((1 - value) * 255);
+  const g = Math.round(value * 255);
+  const b = 100;
+
+  return `rgb(${r},${g},${b})`;
+}
+
 function styleFeature(feature, weights) {
   const lqi = calculateLQI(feature.properties, weights);
   return {
-    fillColor: lqi > 0.7 ? "#2ECC71" : lqi > 0.4 ? "#F1C40F" : "#E74C3C",
+    fillColor: getContinuousColor(lqi),
     weight: 2,
     opacity: 1,
     color: "white",
@@ -60,42 +81,7 @@ function styleFeature(feature, weights) {
   };
 }
 
-function updateMap(data) {
-  console.log("updateMap foi chamado", data);
-  currentData = data;
-  getWeights();
-  updateSliderLabels();
-
-  if (!map) {
-    const center = data.meta?.map_center
-      ? [data.meta.map_center[1], data.meta.map_center[0]]
-      : [52.5, 13.4];
-    const zoom = data.meta?.map_zoom || 11;
-
-    map = L.map("map", {
-      center: center,
-      zoom: zoom
-    });
-
-    const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-      subdomains: ["a", "b", "c"],
-      maxZoom: 19,
-    }).addTo(map);
-
-    tileLayer.on("load", () => {
-      console.log("Todos os tiles carregados.");
-    });
-
-    scaleControl = L.control.scale({ imperial: false }).addTo(map);
-    console.log("Coordenadas do centro do mapa (após inicialização):", map.getCenter());
-
-    setTimeout(() => {
-      map.invalidateSize();
-      console.log("map.invalidateSize() chamado após delay");
-    }, 1000);
-  }
-
+function drawGeoLayer(data) {
   if (geoLayer) {
     map.removeLayer(geoLayer);
   }
@@ -121,12 +107,80 @@ function updateMap(data) {
   console.log("Coordenadas do centro do mapa (após ajustar bounds):", map.getCenter());
 }
 
-// Executa só após o DOM estar carregado
-window.addEventListener("DOMContentLoaded", () => {
-  // Atualiza valores iniciais dos sliders
+function updateMap(data) {
+  console.log("updateMap foi chamado", data);
+  currentData = data;
+  getWeights();
   updateSliderLabels();
 
-  // Carrega o GeoJSON
+  if (!map) {
+    const center = data.meta?.map_center
+      ? [data.meta.map_center[1], data.meta.map_center[0]]
+      : [52.5, 13.4];
+    const zoom = data.meta?.map_zoom || 11;
+
+    map = L.map("map", {
+      center: center,
+      zoom: zoom
+    });
+
+    const tileProvider = data.meta?.map_tile || "osm";
+
+    if (tileProvider !== "none") {
+      let tileURL = "";
+      let attribution = "";
+
+      switch (tileProvider) {
+        case "osm-hot":
+          tileURL = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+          attribution = "&copy; OpenStreetMap contributors";
+          break;
+        case "carto":
+          tileURL = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+          attribution = '&copy; OpenStreetMap & CARTO';
+          break;
+        case "stamen":
+          tileURL = "https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png";
+          attribution = 'Map tiles by Stamen Design, &copy; OpenStreetMap contributors';
+          break;
+        default:
+          tileURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+          attribution = "&copy; OpenStreetMap contributors";
+      }
+
+      const tileLayer = L.tileLayer(tileURL, {
+        attribution: attribution,
+        subdomains: ["a", "b", "c"],
+        maxZoom: 19,
+      }).addTo(map);
+
+      tileLayer.on("load", () => {
+        console.log("Todos os tiles carregados.");
+      });
+    } else {
+      console.log("Nenhum tileLayer carregado (modo 'none').");
+    }
+
+    scaleControl = L.control.scale({ imperial: false }).addTo(map);
+    console.log("Coordenadas do centro do mapa (após inicialização):", map.getCenter());
+  }
+
+  // Controle de atraso para exibir o GeoJSON
+  const useDelay = data.meta?.map_tile_overlay === true && data.meta?.map_tile !== "none";
+
+  if (useDelay) {
+    setTimeout(() => {
+      console.log("Adicionando GeoJSON após delay para evitar conflito com tiles");
+      drawGeoLayer(data);
+    }, 600);
+  } else {
+    drawGeoLayer(data);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  updateSliderLabels();
+
   fetch("data.geojson")
     .then((response) => response.json())
     .then((data) => {
@@ -134,7 +188,6 @@ window.addEventListener("DOMContentLoaded", () => {
       updateMap(data);
     });
 
-  // Liga os sliders aos eventos
   ["wGreen", "wSummer", "wHot", "wTrop"].forEach((id) => {
     const slider = document.getElementById(id);
     if (slider) {
