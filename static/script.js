@@ -96,13 +96,13 @@ function updateMap(data) {
     //   attribution: '&copy; OSM contributors'
     //   }).addTo(map);
 
-    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      attribution: '&copy; OSM contributors'
-    }).addTo(map);
+    // const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; OSM contributors'
+    // }).addTo(map);
     
-    tileLayer.on('load', function () {
-      console.log("Todos os tiles carregados.");
-    });
+    // tileLayer.on('load', function () {
+    //   console.log("Todos os tiles carregados.");
+    // });
     
 
     // L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
