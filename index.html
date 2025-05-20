@@ -1,57 +1,59 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>City Life Quality Maps</title>
   <link rel="icon" href="static/favicon.ico" type="image/x-icon">
-  <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    h1 { color: #2c3e50; }
-    ul { list-style-type: none; padding-left: 0; }
-    li { margin-bottom: 0.5rem; }
-    .city { margin-top: 2rem; }
-  </style>
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-  <h1>City Life Quality Maps</h1>
+  <header>
+    <h1>City Life Quality Index</h1>
+    <p>Explore the life quality indices of various cities around the world.</p>
+  <div class="container">
+    <!-- Lateral esquerda: Lista de cidades -->
+    <aside class="sidebar">
+      <h2>Cities</h2>
+      <ul>
+        <li><a href="cities/berlin/2024/map.html">Berlin 2024 (Germany) ** (full implemented!)</a></li>
+        <li><a href="cities/berlin/2025/map.html">Berlin 2025 (Germany) [at work]</a></li>
+        <li><a href="cities/florianopolis/2024/map.html">Florianópolis (Brazil) [at work]</a></li>
+        <!-- more city ... -->
+      </ul>
+    </aside>
 
-  <!--
-  <div id="controls">
-    <label for="city">Where?</label>
-    <select id="city">
-      <option value="berlin">Berlin</option>
-      <option value="florianopolis">Florianópolis</option>
-    </select>
-  
-    <label for="year">When?</label>
-    <select id="year">
-      <option value="2024">2024</option>
-      <option value="2025">2025</option>
-    </select>
-  
-    <button id="loadMap">Go!</button>
+    <main class="content">      
+      <div class="readme-text">
+        <h2>The index's background</h2>
+        <p>
+          Project based on the UN's project <a href="https://unhabitat.org/" target="_blank" rel="noopener noreferrer"> UN-Habitat</a>".
+        </p>
+        <p>
+          UN aims "a better quality of life for all in an urbanizing world".
+        </p>
+        <p>
+          Some tools are available to achive it, such as data and parameters reference like a Periodic Tables (below) and the <a href="https://data.unhabitat.org/pages/city-prosperity-index" target="_blank" rel="noopener noreferrer"> City Prosperity Index (CPI)</a>.
+        </p>
+        <p>
+          However, these information is neither fully spatialized (just some cities) nor have neighbourhood resolution, i.e. it is useful to compre cities but not neighbourhood within the cities. 
+        </p>
+        <p>
+          We did it for you! We used the UN's ideas and spatialized the information to a city level.
+        <p>
+          Explore the maps to see how different factors like green spaces, summer days, hot days, and tropical nights 
+          contribute to the overall life quality index.
+        </p>
+        <p>
+          Use the sidebar to select a city and view its detailed map and life quality data.
+        </p>
+        <img src="assets/image/unhabitat_cityquality_periodic_table_from_facebook.jpg" class="overview-image" alt="Life Quality Periodic Table" width="300" title="Life Quality Periodic Table (UN-Habitat)">
+        <p>
+          Font (Figure): <a href="https://www.facebook.com/profile/100064592777988/search/?q=periodic%20table" target="_blank" rel="noopener noreferrer"> UN Habitat on Facebook </a>
+        </p>
+
+      </div>
+    </main>
   </div>
-  -->
-
-  
-  <div class="city">
-    <h2>Berlin</h2>
-    <ul>
-      <li><a href="cities/berlin/2024/map.html">2024 Map [full implemented] </a></li>
-      <li><a href="cities/berlin/2025/map.html">2025 Map [partial implemented]</a></li>
-    </ul>
-  </div>
-
-  
-  <div class="city">
-    <h2>Florianópolis</h2>
-    <ul>
-      <li><a href="cities/florianopolis/2024/map.html">2024 Map [map only]</a></li>
-      <li><a href="cities/florianopolis/2024/map.html">2025 Map [map only]</a></li>
-    </ul>
-  </div>
-
-
 </body>
 </html>
