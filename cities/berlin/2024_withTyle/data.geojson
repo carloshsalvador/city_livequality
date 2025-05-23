@@ -7,7 +7,7 @@
       52.501493
     ],
     "map_zoom": 11,
-    "map_tile": "none",
+    "map_tile": "osm",
     "map_tile_overlay": true,
     "description": {
       "green_per": "Raw: green_per, Normalised: green_per_norm",
