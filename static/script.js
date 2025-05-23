@@ -10,9 +10,7 @@ let weights = {
   green: 1.0,
   summer: 1.0,
   hot: 1.0,
-  trop: 1.0,
-  pm25: 1.0,
-  no2: 1.0
+  trop: 1.0
 };
 
 function getWeights() {
@@ -20,8 +18,6 @@ function getWeights() {
   weights.summer = parseFloat(document.getElementById("wSummer")?.value || 1.0);
   weights.hot = parseFloat(document.getElementById("wHot")?.value || 1.0);
   weights.trop = parseFloat(document.getElementById("wTrop")?.value || 1.0);
-  weights.pm25 = parseFloat(document.getElementById("wPM25")?.value || 1.0);
-  weights.no2 = parseFloat(document.getElementById("wNO2")?.value || 1.0);
   console.log("Updated weights:", weights);
 }
 
@@ -30,21 +26,16 @@ function updateSliderLabels() {
   document.getElementById("valSummer").innerText = weights.summer.toFixed(2);
   document.getElementById("valHot").innerText = weights.hot.toFixed(2);
   document.getElementById("valTrop").innerText = weights.trop.toFixed(2);
-  document.getElementById("valPM25").innerText = weights.pm25.toFixed(2);
-  document.getElementById("valNO2").innerText = weights.no2.toFixed(2);
 }
 
 function calculateLQI(properties, weights) {
-  const totalWeight = Object.values(weights).reduce((sum, w) => sum + w, 0);
-  const score = (
-    weights.green * properties.green_per_norm +
-    weights.summer * properties.summerday_norm +
-    weights.hot * properties.hotday_norm +
-    weights.trop * properties.Tropicalnights_norm +
-    weights.pm25 * properties.pm25_norm +
-    weights.no2 * properties.no2_norm
+  return (
+    (weights.green * properties.green_per_norm +
+     weights.summer * properties.summerday_norm +
+     weights.hot * properties.hotday_norm +
+     weights.trop * properties.Tropicalnights_norm) /
+    (weights.green + weights.summer + weights.hot + weights.trop)
   );
-  return score / totalWeight;
 }
 
 function getContinuousColor(lqi) {
@@ -157,7 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
       updateMap(data);
     });
 
-  ["wGreen", "wSummer", "wHot", "wTrop", "wPM25", "wNO2"].forEach(id => {
+  ["wGreen", "wSummer", "wHot", "wTrop"].forEach(id => {
     document.getElementById(id)?.addEventListener("input", () => {
       getWeights();
       updateSliderLabels();
