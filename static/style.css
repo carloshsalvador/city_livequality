@@ -1,10 +1,9 @@
-/* Área do mapa */
+/* Base page layout */
 html, body {
   margin: 0;
   height: 100%;
-  overflow: auto; /* Permite rolagem ... before was 'hidden' but with problem!*/
+  overflow: auto; /* Allows scrolling */
 }
-
 
 #map {
   position: absolute;
@@ -21,7 +20,7 @@ html, body {
   z-index: 100;
 }
 
-/* Estilo adicional para garantir que os polígonos GeoJSON fiquem visíveis */
+/* GeoJSON polygon visibility fix */
 .leaflet-overlay-pane svg path {
   pointer-events: auto !important;
   display: inline !important;
@@ -30,28 +29,41 @@ html, body {
   stroke-width: 2;
 }
 
-
-
+/* === NEW RESPONSIVE TOP BAR LAYOUT === */
 #top-bar {
   position: absolute;
   top: 75px;
   left: 10px;
   right: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   z-index: 1000;
 }
 
-/* Mantém a aparência dos sliders */
+@media (max-width: 768px) {
+  #top-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sliders container with grid layout */
 .slider-container {
   background: white;
   padding: 10px;
   border-radius: 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
+@media (max-width: 768px) {
+  .slider-container {
+    grid-template-columns: 1fr;
+  }
+}
 
-/* Ajuste da legenda horizontal */
+/* Legend box */
 #legend-container {
   background: white;
   padding: 6px;
@@ -63,32 +75,7 @@ html, body {
   height: auto;
 }
 
-/* Sliders 
-.slider-container {
-  padding: 10px;
-  background: white;
-  z-index: 1000;
-  position: relative;
-} */
-
-
-/* Legenda 
-#legend-container {
-  position: absolute;
-  left: 20px;
-  top: 180px;
-  z-index: 1000;
-  background: white;
-  padding: 4px;
-  border-radius: 4px;
-} */
-
-/*
-#legend-container img {
-  height: 200px;
-} */
-
-/* Compass */
+/* Compass image */
 #compass {
   position: absolute;
   left: 10px;
@@ -100,7 +87,7 @@ html, body {
   height: 90px;
 }
 
-/* Controle dos mapas */
+/* Tile/map control section */
 #controls {
   margin-bottom: 20px;
 }
