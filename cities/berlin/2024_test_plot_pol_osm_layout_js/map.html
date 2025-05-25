@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Quality Index – Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="icon" href="../../../static/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> <!-- Leaflet carregado primeiro -->
+  <script src="script.js" defer></script> <!-- script.js carregado depois -->
+</head>
+<body>
+  <header>
+    <h1>Life Quality Index – Berlin 2024</h1>
+  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <div id="controls">
+        <div class="slider-container">
+          <label for="wGreen">Green Area:</label>
+          <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0">
+          <span id="valGreen">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wSummer">Summer:</label>
+          <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0">
+          <span id="valSummer">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wHot">Hot Days:</label>
+          <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0">
+          <span id="valHot">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wTrop">Tropical Nights:</label>
+          <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0">
+          <span id="valTrop">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wPM25">PM2.5:</label>
+          <input type="range" id="wPM25" min="0" max="1" step="0.01" value="1.0">
+          <span id="valPM25">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wNO2">NO₂:</label>
+          <input type="range" id="wNO2" min="0" max="1" step="0.01" value="1.0">
+          <span id="valNO2">1.0</span>
+        </div>
+      </div>
+    </aside>
+    <main class="content">
+      <div id="map"></div>
+      <div id="legend">
+        <img src="../../../static/legend.png" alt="Legend" />
+      </div>
+      <div id="compass">
+        <img src="../../../static/compass.png" alt="Compass" />
+      </div>
+    </main>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>

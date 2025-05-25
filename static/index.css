@@ -1,0 +1,66 @@
+/* Estilos gerais */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background: #0078d7;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Container principal */
+  .container {
+    display: flex;
+    flex: 1;
+    height: 100%;
+  }
+  
+  /* Barra lateral */
+  .sidebar {
+    flex: 0 0 250px; /* Largura fixa */
+    background: #f4f4f4;
+    padding: 20px;
+    overflow-y: auto; /* Permite scroll na barra lateral */
+    border-right: 1px solid #ccc;
+  }
+  
+  /* Conteúdo principal */
+  .content {
+    flex: 1; /* Ocupa o restante do espaço */
+    padding: 20px;
+    overflow-y: auto; /* Permite scroll no conteúdo principal */
+  }
+  
+  /* Estilo para listas */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #0078d7;
+  }
+  
+  .sidebar ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Imagem responsiva */
+  .readme-text img {
+    max-width: 100%;
+    height: auto;
+  }

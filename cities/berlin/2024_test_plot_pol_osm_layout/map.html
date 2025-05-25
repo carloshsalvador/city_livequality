@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Quality Index – Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../../../static/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <h1>Life Quality Index – Berlin 2024</h1>
+  </header>
+  <div class="container">
+    <!-- Barra lateral com sliders -->
+    <aside class="sidebar">
+      <div id="controls">
+        <div class="slider-container">
+          <label for="wGreen">Green Area:</label>
+          <input type="range" id="wGreen" min="0" max="1" step="0.01" value="1.0">
+          <span id="valGreen">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wSummer">Summer:</label>
+          <input type="range" id="wSummer" min="0" max="1" step="0.01" value="1.0">
+          <span id="valSummer">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wHot">Hot Days:</label>
+          <input type="range" id="wHot" min="0" max="1" step="0.01" value="1.0">
+          <span id="valHot">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wTrop">Tropical Nights:</label>
+          <input type="range" id="wTrop" min="0" max="1" step="0.01" value="1.0">
+          <span id="valTrop">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wPM25">PM2.5:</label>
+          <input type="range" id="wPM25" min="0" max="1" step="0.01" value="1.0">
+          <span id="valPM25">1.0</span>
+        </div>
+        <div class="slider-container">
+          <label for="wNO2">NO₂:</label>
+          <input type="range" id="wNO2" min="0" max="1" step="0.01" value="1.0">
+          <span id="valNO2">1.0</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mapa -->
+    <main class="content">
+      <div id="map"></div>
+      <div id="legend">
+        <img src="../../../static/legend.png" alt="Legend" />
+      </div>
+      <div id="compass">
+        <img src="../../../static/compass.png" alt="Compass" />
+      </div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([52.5, 13.4], 10);
+
+    // Adiciona o fundo OSM
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let geoLayer = null;
+    const weights = {
+      green: 1.0,
+      summer: 1.0,
+      hot: 1.0,
+      trop: 1.0,
+      pm25: 1.0,
+      no2: 1.0
+    };
+
+    function updateSliderLabels() {
+      document.getElementById("valGreen").textContent = weights.green.toFixed(2);
+      document.getElementById("valSummer").textContent = weights.summer.toFixed(2);
+      document.getElementById("valHot").textContent = weights.hot.toFixed(2);
+      document.getElementById("valTrop").textContent = weights.trop.toFixed(2);
+      document.getElementById("valPM25").textContent = weights.pm25.toFixed(2);
+      document.getElementById("valNO2").textContent = weights.no2.toFixed(2);
+    }
+
+    function calculateLQI(properties) {
+      const totalWeight = Object.values(weights).reduce((sum, w) => sum + w, 0);
+      const score = (
+        weights.green * properties.green_per_norm +
+        weights.summer * properties.summerday_norm +
+        weights.hot * properties.hotday_norm +
+        weights.trop * properties.Tropicalnights_norm +
+        weights.pm25 * properties.pm25_norm +
+        weights.no2 * properties.no2_norm
+      );
+      return score / totalWeight;
+    }
+
+    function styleFeature(feature) {
+      const lqi = calculateLQI(feature.properties);
+      return {
+        fillColor: getContinuousColor(lqi),
+        weight: 2,
+        opacity: 1,
+        color: "white",
+        fillOpacity: 0.7
+      };
+    }
+
+    function getContinuousColor(lqi) {
+      const v = Math.max(0, Math.min(1, lqi));
+      const r = Math.round((1 - v) * 255);
+      const g = Math.round(v * 255);
+      return `rgb(${r},${g},100)`;
+    }
+
+    function drawGeoLayer(data) {
+      if (geoLayer) map.removeLayer(geoLayer);
+      geoLayer = L.geoJSON(data, {
+        style: styleFeature,
+        onEachFeature: (feature, layer) => {
+          const lqi = calculateLQI(feature.properties);
+          layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
+        }
+      }).addTo(map);
+    }
+
+    fetch('data.geojson')
+      .then(response => response.json())
+      .then(data => {
+        drawGeoLayer(data);
+      })
+      .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
+
+    // Atualiza os sliders dinamicamente
+    ["wGreen", "wSummer", "wHot", "wTrop", "wPM25", "wNO2"].forEach(id => {
+      document.getElementById(id).addEventListener("input", (event) => {
+        weights[id.slice(1).toLowerCase()] = parseFloat(event.target.value);
+        updateSliderLabels();
+        fetch('data.geojson')
+          .then(response => response.json())
+          .then(data => {
+            drawGeoLayer(data);
+          });
+      });
+    });
+
+    updateSliderLabels();
+  </script>
+</body>
+</html>
