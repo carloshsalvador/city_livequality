@@ -1,81 +1,94 @@
-/* Base page layout */
+/* Estilo geral */
 html, body {
   margin: 0;
+  padding: 0;
   height: 100%;
-  overflow: auto; /* Allows scrolling */
+  font-family: sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
+h1 {
+  margin: 10px;
+  font-size: 1.8rem;
+  color: #2c3e50;
+  text-align: left;
+  z-index: 2000; /* higher than zindex at top-bar and map */
+  position: relative; /* Para evitar que o mapa o sobreponha */
+}
+
+/* Mapa */
 #map {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  top: 160px; /* Espaço reservado para a barra superior */
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   z-index: 0;
+  background: transparent; /* check if it is good */
 }
 
-.leaflet-tile-pane, .leaflet-overlay-pane {
-  z-index: 100;
-}
-
-/* GeoJSON polygon visibility fix */
-.leaflet-overlay-pane svg path {
-  pointer-events: auto !important;
-  display: inline !important;
-  fill-opacity: 1 !important;
-  stroke: white !important;
-  stroke-width: 2;
-}
-
-/* === NEW RESPONSIVE TOP BAR LAYOUT === */
+/* Barra superior fixa */
 #top-bar {
   position: absolute;
-  top: 75px;
-  left: 10px;
-  right: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  top: 60px; /* space for title */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between; /* Espaça os elementos */
+  align-items: flex-start;
   gap: 1rem;
+  padding: 8px;
+  background: white;
   z-index: 1000;
 }
 
-@media (max-width: 768px) {
-  #top-bar {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Sliders container with grid layout */
+/* Sliders compactos */
 .slider-container {
-  background: white;
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que os sliders quebrem para a próxima linha */
+  gap: 6px 10px;
+  background: #ffffff;
   border-radius: 4px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  padding: 6px;
+  min-width: 0;
+  flex: 1;
 }
 
-@media (max-width: 768px) {
-  .slider-container {
-    grid-template-columns: 1fr;
-  }
+.slider-container label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-/* Legend box */
+.slider-container input[type="range"] {
+  flex-grow: 1;
+}
+
+.slider-container span {
+  width: 2.5rem;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+/* Legenda */
 #legend-container {
   background: white;
   padding: 6px;
   border-radius: 4px;
+  min-width: 160px;
+  max-width: 200px;
+  flex-shrink: 0;
 }
 
 #legend-container img {
-  width: 300px;
+  max-width: 100%;
   height: auto;
 }
 
-/* Compass image */
+/* Bússola */
 #compass {
   position: absolute;
   left: 10px;
@@ -87,16 +100,11 @@ html, body {
   height: 90px;
 }
 
-/* Tile/map control section */
-#controls {
-  margin-bottom: 20px;
-}
-
-#controls label {
-  margin-right: 10px;
-}
-
-#controls select,
-#controls button {
-  margin-right: 15px;
+/* Leaflet overlay visibility */
+.leaflet-overlay-pane svg path {
+  pointer-events: auto !important;
+  display: inline !important;
+  fill-opacity: 1 !important;
+  stroke: white !important;
+  stroke-width: 2;
 }
