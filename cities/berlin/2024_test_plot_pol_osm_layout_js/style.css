@@ -56,9 +56,9 @@ header {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background: rgba(255, 255, 255, 0.8);
+  background: transparent; /* rgba(255, 255, 255, 0.8);*/
   padding: 5px;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 4px;
   z-index: 1000;
 }
@@ -73,13 +73,12 @@ header {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: rgba(255, 255, 255, 0.8);
+  background: transparent;/* rgba(255, 255, 255, 0.8);*/
   padding: 5px;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 4px;
   z-index: 1000;
 }
-
 #compass img {
   max-width: 90px;
   height: auto;
