@@ -1,6 +1,7 @@
 {
   "meta": {
     "norm_method": "MinMax",
+    "norm_ref_city": "Berlin",
     "norm_ref_year": 2024,
     "map_center": [
       13.402313,
