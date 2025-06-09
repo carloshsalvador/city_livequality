@@ -45,8 +45,7 @@ function drawGeoLayer(data) {
       fillOpacity: 0.7
     }),
     onEachFeature: (feature, layer) => {
-      const lqi = calculateLQI(feature.properties);
-      //layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
+      const lqi = calculateLQI(feature.properties);  
       layer.bindPopup(`
         <b>${feature.properties.ID || "Area"}</b><br>
         LQI: ${lqi.toFixed(3)}<br>
