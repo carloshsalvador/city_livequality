@@ -55,7 +55,7 @@ function drawGeoLayer(data) {
         Hot days: ${(feature.properties.hotday).toFixed(1)} days/year<br>
         Tropical nights: ${(feature.properties.Tropicalnights).toFixed(1)} days/year<br>
         PM2.5: ${(feature.properties.pm25.toFixed(1))} µg/m³<br>
-        NO₂: ${feature.properties.no2} µg/m³<br>`);
+        NO₂: ${feature.properties.no2.toFixed(1)} µg/m³<br>`);
     }
   }).addTo(mapInstance); // Use mapInstance aqui
 }
