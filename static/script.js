@@ -1,4 +1,4 @@
-const mapInstance = L.map('map').setView([52.5, 13.4], 10);
+const mapInstance = L.map('map'); //.setView([52.5, 13.4], 10);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -46,7 +46,16 @@ function drawGeoLayer(data) {
     }),
     onEachFeature: (feature, layer) => {
       const lqi = calculateLQI(feature.properties);
-      layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
+      //layer.bindPopup(`<b>${feature.properties.name || "Area"}</b><br>LQI: ${lqi.toFixed(3)}`);
+      layer.bindPopup(`
+        <b>${feature.properties.ID || "Area"}</b><br>
+        LQI: ${lqi.toFixed(3)}<br>
+        Green: ${(feature.properties.green_per).toFixed(1)} %<br>
+        Summer days: ${(feature.properties.summerday).toFixed(1)} days/year<br>
+        Hot days: ${(feature.properties.hotday).toFixed(1)} days/year<br>
+        Tropical nights: ${(feature.properties.Tropicalnights).toFixed(1)} days/year<br>
+        PM2.5: ${(feature.properties.pm25.toFixed(1))} µg/m³<br>
+        NO₂: ${feature.properties.no2} µg/m³<br>`);
     }
   }).addTo(mapInstance); // Use mapInstance aqui
 }
@@ -78,6 +87,8 @@ fetch('data.geojson')  // manter sem pahts superior, pois o arquivo já está na
     const city = data.meta?.norm_ref_city || "Your City";
     document.getElementById('main-title').textContent = `Life Quality Index - ${city} (${year})`;
     drawGeoLayer(data);
+    const bounds = L.geoJSON(data).getBounds();
+    mapInstance.fitBounds(bounds);
   })
   .catch(error => console.error('Erro ao carregar o GeoJSON:', error));
 

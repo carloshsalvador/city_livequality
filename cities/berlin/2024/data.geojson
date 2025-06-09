@@ -1,15 +1,13 @@
 {
   "meta": {
     "norm_method": "MinMax",
-    "norm_ref_city": "Berlin",
     "norm_ref_year": 2024,
     "map_center": [
       13.402313,
       52.501493
     ],
     "map_zoom": 11,
-    "map_tile": "none",
-    "map_tile_overlay": true,
+    "norm_ref_city": "Berlin",
     "description": {
       "green_per": "Raw: green_per, Normalised: green_per_norm",
       "summerday": "Raw: summerday, Normalised: summerday_norm",
@@ -34,8 +32,9 @@
         "summerday_norm": 0.7762237762237763,
         "hotday_norm": 0.7857142857142856,
         "Tropicalnights_norm": 0.6499999999999999,
-        "pm25_norm": 0.045387521025981314,
-        "no2_norm": 0.046457617829482434
+        "pm25_norm": 0.9546124789740187,
+        "no2_norm": 0.9535423821705176,
+        "ID": "Charlottenburg-Wilmersdorf"
       },
       "geometry": {
         "type": "Polygon",
@@ -6384,8 +6383,9 @@
         "summerday_norm": 0.1888111888111892,
         "hotday_norm": 0.16666666666666652,
         "Tropicalnights_norm": 0.0,
-        "pm25_norm": 0.8435469760657819,
-        "no2_norm": 0.6930356177346373
+        "pm25_norm": 0.15645302393421812,
+        "no2_norm": 0.3069643822653627,
+        "ID": "Friedrichshain-Kreuzberg"
       },
       "geometry": {
         "type": "Polygon",
@@ -9520,8 +9520,9 @@
         "summerday_norm": 0.12587412587412627,
         "hotday_norm": 0.16666666666666652,
         "Tropicalnights_norm": 0.8,
-        "pm25_norm": 0.7087600095194979,
-        "no2_norm": 0.5538883395175676
+        "pm25_norm": 0.2912399904805021,
+        "no2_norm": 0.44611166048243245,
+        "ID": "Lichtenberg"
       },
       "geometry": {
         "type": "Polygon",
@@ -13996,8 +13997,9 @@
         "summerday_norm": 0.0769230769230771,
         "hotday_norm": 0.0952380952380949,
         "Tropicalnights_norm": 1.0,
-        "pm25_norm": 0.34272289471792305,
-        "no2_norm": 0.22107462025516256
+        "pm25_norm": 0.657277105282077,
+        "no2_norm": 0.7789253797448374,
+        "ID": "Marzahn-Hellersdorf"
       },
       "geometry": {
         "type": "Polygon",
@@ -18068,8 +18070,9 @@
         "summerday_norm": 0.24475524475524457,
         "hotday_norm": 0.23809523809523792,
         "Tropicalnights_norm": 0.19999999999999996,
-        "pm25_norm": 0.5204810905199997,
-        "no2_norm": 0.5160894537847258
+        "pm25_norm": 0.4795189094800003,
+        "no2_norm": 0.4839105462152742,
+        "ID": "Mitte"
       },
       "geometry": {
         "type": "Polygon",
@@ -22468,8 +22471,9 @@
         "summerday_norm": 0.05594405594405627,
         "hotday_norm": 0.04761904761904745,
         "Tropicalnights_norm": 0.75,
-        "pm25_norm": 1.0,
-        "no2_norm": 1.0
+        "pm25_norm": 0.0,
+        "no2_norm": 0.0,
+        "ID": "Neukölln"
       },
       "geometry": {
         "type": "Polygon",
@@ -25788,8 +25792,9 @@
         "summerday_norm": 0.2727272727272725,
         "hotday_norm": 0.2857142857142856,
         "Tropicalnights_norm": 0.95,
-        "pm25_norm": 0.330899532393059,
-        "no2_norm": 0.15471465879126312
+        "pm25_norm": 0.669100467606941,
+        "no2_norm": 0.8452853412087369,
+        "ID": "Pankow"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -34362,8 +34367,9 @@
         "summerday_norm": 0.7692307692307692,
         "hotday_norm": 0.7619047619047619,
         "Tropicalnights_norm": 0.6499999999999999,
-        "pm25_norm": 0.20141393984399514,
-        "no2_norm": 0.18383846564824502
+        "pm25_norm": 0.7985860601560049,
+        "no2_norm": 0.816161534351755,
+        "ID": "Reinickendorf"
       },
       "geometry": {
         "type": "Polygon",
@@ -39722,8 +39728,9 @@
         "summerday_norm": 0.7412587412587412,
         "hotday_norm": 0.7380952380952381,
         "Tropicalnights_norm": 0.75,
-        "pm25_norm": 0.0,
-        "no2_norm": 0.0
+        "pm25_norm": 1.0,
+        "no2_norm": 1.0,
+        "ID": "Spandau"
       },
       "geometry": {
         "type": "Polygon",
@@ -45314,8 +45321,9 @@
         "summerday_norm": 0.9090909090909092,
         "hotday_norm": 0.9047619047619047,
         "Tropicalnights_norm": 0.7,
-        "pm25_norm": 0.14891947257566418,
-        "no2_norm": 0.14054115684072466
+        "pm25_norm": 0.8510805274243358,
+        "no2_norm": 0.8594588431592753,
+        "ID": "Steglitz-Zehlendorf"
       },
       "geometry": {
         "type": "Polygon",
@@ -49870,8 +49878,9 @@
         "summerday_norm": 0.0,
         "hotday_norm": 0.0,
         "Tropicalnights_norm": 0.8,
-        "pm25_norm": 0.9845142363412691,
-        "no2_norm": 0.9665539221443855
+        "pm25_norm": 0.015485763658730889,
+        "no2_norm": 0.03344607785561449,
+        "ID": "Tempelhof-Schöneberg"
       },
       "geometry": {
         "type": "Polygon",
@@ -53682,8 +53691,9 @@
         "summerday_norm": 1.0,
         "hotday_norm": 1.0,
         "Tropicalnights_norm": 0.6000000000000001,
-        "pm25_norm": 0.2113769457020176,
-        "no2_norm": 0.08678436606991324
+        "pm25_norm": 0.7886230542979824,
+        "no2_norm": 0.9132156339300868,
+        "ID": "Treptow-Köpenick"
       },
       "geometry": {
         "type": "Polygon",
